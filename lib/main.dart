@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'features/auth/presentation/screens/login_screen.dart';
+import 'features/auth/domain/auth_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,21 +13,20 @@ class CarePulseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'CarePulse',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF0052CC),
-          primary: const Color(0xFF0052CC),
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: MaterialApp(
+        title: 'CureCare',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF0052CC),
+            primary: const Color(0xFF0052CC),
+          ),
+          scaffoldBackgroundColor: Colors.white,
+          useMaterial3: true,
         ),
-        scaffoldBackgroundColor: Colors.white,
-        useMaterial3: true,
-      ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Clinishift Initializing...'),
-        ),
+        home: const LoginScreen(),
       ),
     );
   }
