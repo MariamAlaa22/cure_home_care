@@ -5,6 +5,7 @@ import '../widgets/primary_button.dart';
 import 'signup_step1.dart';
 import '../../domain/auth_cubit.dart';
 import '../../domain/auth_state.dart';
+import '../../../booking/presentation/screens/dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -231,6 +232,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 backgroundColor: Colors.green,
                               ),
                             );
+
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DashboardScreen(),
+                              ),
+                            );
                           }
                           if (state is AuthError) {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -257,9 +265,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 context.read<AuthCubit>().login(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                );
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    );
                               }
                             },
                           );
@@ -276,37 +284,37 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                               color: Color(0xFF667085),
                               fontSize: 14,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignupStep1(),
                             ),
+                          );
+                        },
+                        child: const Text(
+                          'Create an Account',
+                          style: TextStyle(
+                            color: Color(0xFF0052CC),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SignupStep1(),
-                                ),
-                              );
-                            },
-                            child: const Text(
-                              'Create an Account',
-                              style: TextStyle(
-                                color: Color(0xFF0052CC),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
-                ),
+                ],
               ),
-              const SizedBox(height: 32),
-            ],
+            ),
           ),
-        ),
+          const SizedBox(height: 32),
+        ],
       ),
-    );
-  }
+    ),
+  ),
+);
+}
 }

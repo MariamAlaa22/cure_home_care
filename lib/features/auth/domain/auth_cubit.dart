@@ -15,7 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
     final isSuccess = AuthMockData.loginCheck(email: email, password: password);
 
     if (isSuccess) {
-      emit(const AuthSuccess("Welcome back to CureCare!")); 
+      emit(AuthSuccess('Login successful for $email'));
     } else {
       emit(const AuthError("Invalid email or password.")); 
     }
